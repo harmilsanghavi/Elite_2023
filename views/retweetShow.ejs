@@ -37,13 +37,10 @@
                                 <div class="icon">
                                     <!-- <div class="insta" id="append"> -->
                                         <div class="retweetCard1">
-                                            <textarea name="comment" id="emoji123"
-                                                placeholder="Add a comment"></textarea>
+                                            <input type="text" name="comment" id="emoji123"
+                                              value="<%=retweet[0].retweet_data%>"  ></input>
                                         </div>
-                                        <div class="retweetCard2">
-                                            <i class="fa-regular fa-face-smile "  onclick="abc()"></i>
-                                            <emoji-picker></emoji-picker>
-                                        </div>
+                                       
                                         <!-- removed from here{show retweet} -->
                                     <!-- </div> -->
                                 </div>
@@ -66,10 +63,7 @@
                                             <% }}%>
                                 </div>
 
-                                <div class="retweetPost">
-                                    <span id="<%=tweetdata[i].id%>" onclick="postComment(this)">
-                                        Post</span>
-                                </div>
+                            
 
                             </div>
                         </div>
@@ -79,49 +73,6 @@
         </div>
 
     </div>
-
-    <script>
-        async function postComment(id) {
-            console.log(id.id)
-            var c = document.getElementById("emoji123").value
-            var data = await fetch(`/retweet/reC?twid=${id.id}&comment=${c}`)
-            location.assign('/login/login')
-            var retweet = await data.json()
-            console.log(retweet)
-            console.log(retweet.nameImage[0].name)
-            console.log(retweet.nameImage[0].user_image)
-            console.log(retweet.result2[0].retweet_data)
-            document.getElementById("all").innerHTML = retweet.result2[0].retweet_data
-            document.getElementById("name").innerHTML = retweet.nameImage[0].name
-            if (comment.nameImage[0].user_image == null) {
-                const img = document.createElement("img");
-                img.src = "/files/profile-img.png";
-                document.getElementById("name").appendChild(img);
-                //document.getElementById("image").src = "/files/profile-img.png"
-            } else {
-                document.getElementById("image").src = retweet.nameImage[0].user_image
-            }
-        }
-
-        document.querySelector('emoji-picker')
-            .addEventListener('emoji-click', event => console.log(event.detail));
-
-        document.querySelector('emoji-picker')
-            .addEventListener('emoji-click', event => document.getElementById('emoji123').value += event.detail.unicode);
-
-        document.querySelector('emoji-picker').style.display = "none";
-        // document.querySelector('tweet').style.display = "none";
-
-        function abc() {
-            console.log("harsh")
-            if (document.querySelector('emoji-picker').style.display == "none") {
-                document.querySelector('emoji-picker').style.display = "block";
-            }
-            else {
-                document.querySelector('emoji-picker').style.display = "none";
-            }
-        }
-    </script>
 </body>
 
 </html>
