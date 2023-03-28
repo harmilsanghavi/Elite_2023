@@ -145,8 +145,8 @@
         <!-- post starts -->
         <% const array_of_allowed_files=['png', 'jpeg' , 'jpg' ]; const array_of_allowed_videos=['mp4','gif']; %>
           <% for(var i=0;i<data.length;i++) { %>
-            <div class="profPost">
-              <% var flag=0 %>
+            <%var flag=0 %>
+              <div class="profPost">
 
 
                 <div class="post-child">
@@ -271,8 +271,9 @@
                 <%}%>
       </div>
 
-
-
+      <div class="widgets">
+        <%-include("staticpart2")-%>
+      </div>
 
     </div>
 
