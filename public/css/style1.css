@@ -4,9 +4,6 @@
   padding:0px;
   box-sizing:border-box;
 }
-
-
-
 .body-login{
     text-transform: capitalize;
    font-family: Arial;
@@ -1512,6 +1509,7 @@ margin-left: 40px;
  
   display:flex;
   flex-wrap: wrap;
+<<<<<<< HEAD
   margin-top:21rem;
 padding: .5rem;
 }
@@ -1521,6 +1519,9 @@ padding: .5rem;
   background-color: var(--twitter-background);
   border-radius: 2rem;
  
+=======
+  margin-top:175%;
+>>>>>>> origin/dev-bharti
 }
 .bottomImage img
 {
@@ -1531,8 +1532,6 @@ padding: .5rem;
 .bottomText
 {
   margin-left:5%;
-  
-
 }
 .bottomText p
 {
