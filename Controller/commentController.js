@@ -33,8 +33,15 @@ const newc = asyncHandler(async (req, res) => {
       }
       console.log(arr2)
       console.log("::::::::::::::::::::::::", arr2.length)
+
+      var id = req.session.token_id;
+      var token_id = req.session.token_id;
+      console.log("token::::::  ",token_id)
+      var commentData = await query(`select name,user_image from Elite_User where id='${token_id}'`);
+      console.log("comment data:::::::::::: ",commentData);
+
       //var nameImage=await query(`select name,user_image from Elite_User where id='${req.query.u_id}'`)
-      res.render('commentTweet', { data: tweetdata, c: comment, arr2 })
+      res.render('commentTweet', { data: tweetdata, c: comment, arr2,commentData })
       //res.send({tweetdata})
    }
 })
