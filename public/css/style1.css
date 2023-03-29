@@ -1513,8 +1513,6 @@ margin-left: 40px;
 padding: .5rem;
 }
 .bottom:hover{
-  /* background-color: #6164661a; */
-  /* color: var(--twitter-color); */
   background-color: var(--twitter-background);
   border-radius: 2rem;
  
