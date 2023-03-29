@@ -367,11 +367,8 @@
         async function deleteac() {
 
             if (confirm("are your sure to Delete Account") == true) {
-                const data = await fetch(`/deleteAccount/delete`);
-                const data2 = await data.json();
-                console.log(data2);
-                window.location.href = "/login/login/index5"
-                console.log(data2);
+                fetch(`/deleteAccount/delete`);
+                location.assign(`/login/login`)
             } else {
                 alert("you cancel the delete");
             }
