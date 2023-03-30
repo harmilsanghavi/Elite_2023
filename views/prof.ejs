@@ -280,65 +280,38 @@
 
 
 
-  </div>
+
+
+
+
+    <!-- widgets ends -->
+
+    <dialog id="moreoption">
+      <div class="manubar">
+        <a class="achange" href="http://localhost:8000/changepassword"> Change Password</a>
+        <a class="achange" href="/changepassword/changepassword"> Change Password</a>
+        <a class="achange" id="deleteac" onclick="deleteac()">Delete Account</a>
+        <a class="achange" id="logoutac" onclick="logoutac()">Logout</a>
+
+        <p class="cancel" onclick="dataout()">cancle</p>
+      </div>
+    </dialog>
 
 
 
 
 
+    <script>
 
+      function dataopt() {
 
-
-  <!-- widgets ends -->
-
-  <dialog id="moreoption">
-    <div class="manubar">
-      <a class="achange" href="http://localhost:8000/changepassword"> Change Password</a>
-      <a class="achange" href="/changepassword/changepassword"> Change Password</a>
-      <a class="achange" id="deleteac" onclick="deleteac()">Delete Account</a>
-      <a class="achange" id="logoutac" onclick="logoutac()">Logout</a>
-
-      <p class="cancel" onclick="dataout()">cancle</p>
-    </div>
-  </dialog>
-
-
-
-
-
-  <script>
-
-    function dataopt() {
-
-      var data1 = document.getElementById('moreoption')
-      data1.showModal()
-    }
-    function dataout() {
-      var data1 = document.getElementById('moreoption')
-      data1.close()
-    }
-
-
-
-
-
-
-
-
-    window.onscroll = function () { myFunction() };
-
-    var header = document.getElementById("myHeader");
-
-
-    var sticky = header.offsetTop;
-
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
+        var data1 = document.getElementById('moreoption')
+        data1.showModal()
       }
-    }
+      function dataout() {
+        var data1 = document.getElementById('moreoption')
+        data1.close()
+      }
 
 
 
@@ -347,151 +320,173 @@
 
 
 
-    async function del(abc) {
-      x = parseInt(abc)
-      console.log(x)
+      window.onscroll = function () { myFunction() };
 
-      var text = "you really want to delte this record" + x;
-      if (confirm(text) == true) {
-        text = "you really want to delte this record", x;
-        fetch('/delete?id=' + x, {
-          method: 'post',
-          headers: {
-            "Content-type": 'application/json'
-          },
-          body: JSON.stringify({
-            id: x
+      var header = document.getElementById("myHeader");
+
+
+      var sticky = header.offsetTop;
+
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      }
+
+
+
+
+
+
+
+
+      async function del(abc) {
+        x = parseInt(abc)
+        console.log(x)
+
+        var text = "you really want to delte this record" + x;
+        if (confirm(text) == true) {
+          text = "you really want to delte this record", x;
+          fetch('/delete?id=' + x, {
+            method: 'post',
+            headers: {
+              "Content-type": 'application/json'
+            },
+            body: JSON.stringify({
+              id: x
+            })
           })
-        })
 
-          .then(res => res.json())
-          .then(data => {
-            document.getElementById(x).style.display = 'none';
-            //console.log(data.result.length);
-            console.log(data)
-            console.log("data delete sucesfully!!!!")
-            location.reload()
-          })
-      }
-    }
-
-
-    // var likeobj = 0;
-    var count = 0
-    var flag = true
-    function likepost() {
-      var count2 = document.getElementById("count").innerHTML
-      console.log(count2)
-      var z = document.getElementById('heart1')
-      count = 1
-
-      if (flag == true) {
-        z.style.color = 'red'
-        flag = false;
-      } else {
-        z.style.color = '#e0e2e4'
-        flag = true;
-      }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function dataopt() {
-
-      var data1 = document.getElementById('moreoption')
-      data1.showModal()
-    }
-    function dataout() {
-      var data1 = document.getElementById('moreoption')
-      data1.close()
-    }
-
-
-
-
-
-
-
-
-    window.onscroll = function () { myFunction() };
-
-    var header = document.getElementById("myHeader");
-
-
-    var sticky = header.offsetTop;
-
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
-      }
-    }
-
-
-    function logoutac() {
-
-
-      if (confirm("are your sure to logout") == true) {
-        fetch(`/logout/logout`)
-        location.assign(`/login/login/index5`)
-        console.log("delete")
-      } else {
-        alert("you cancel the delete");
+            .then(res => res.json())
+            .then(data => {
+              document.getElementById(x).style.display = 'none';
+              //console.log(data.result.length);
+              console.log(data)
+              console.log("data delete sucesfully!!!!")
+              location.reload()
+            })
+        }
       }
 
-    }
 
+      // var likeobj = 0;
+      var count = 0
+      var flag = true
+      function likepost() {
+        var count2 = document.getElementById("count").innerHTML
+        console.log(count2)
+        var z = document.getElementById('heart1')
+        count = 1
 
-    async function deleteac() {
-
-      if (confirm("are your sure to Delete Account") == true) {
-        const data = await fetch(`/deleteAccount/delete`);
-        const data2 = await data.json();
-        console.log(data2);
-        window.location.href = "/login/login/index5"
-        console.log(data2);
-      } else {
-        alert("you cancel the delete");
+        if (flag == true) {
+          z.style.color = 'red'
+          flag = false;
+        } else {
+          z.style.color = '#e0e2e4'
+          flag = true;
+        }
       }
 
-    }
 
-    async function likepost(id, like_flag) {
-      if (like_flag == 0) {
-        document.getElementById(`${id}`).style.color = "red"
 
-        const like_result = await fetch(`/likes/likes2?tweet_id=${id}&like_flag=1`);
-        const like_count = await like_result.json();
-        console.log(like_count);
-        document.getElementById(`likeCount${id}`).innerHTML = like_count.countLike;
-        document.getElementById(`${id}`).setAttribute("onclick", `likepost(${id}, 1)`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+      function dataopt() {
+
+        var data1 = document.getElementById('moreoption')
+        data1.showModal()
       }
-      else {
-        var like_btn = document.getElementById(`${id}`).style.color = "black"
-
-        const like_result = await fetch(`/likes/likes2?tweet_id=${id}&like_flag=0`);
-        const like_count = await like_result.json();
-        document.getElementById(`likeCount${id}`).innerHTML = like_count.countLike;
-        document.getElementById(`${id}`).setAttribute("onclick", `likepost(${id},0)`);
+      function dataout() {
+        var data1 = document.getElementById('moreoption')
+        data1.close()
       }
 
-    }
 
-  </script>
+
+
+
+
+
+
+      window.onscroll = function () { myFunction() };
+
+      var header = document.getElementById("myHeader");
+
+
+      var sticky = header.offsetTop;
+
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      }
+
+
+      function logoutac() {
+
+
+        if (confirm("are your sure to logout") == true) {
+          fetch(`/logout/logout`)
+          location.assign(`/login/login/index5`)
+          console.log("delete")
+        } else {
+          alert("you cancel the delete");
+        }
+
+      }
+
+
+      async function deleteac() {
+
+        if (confirm("are your sure to Delete Account") == true) {
+          const data = await fetch(`/deleteAccount/delete`);
+          const data2 = await data.json();
+          console.log(data2);
+          window.location.href = "/login/login/index5"
+          console.log(data2);
+        } else {
+          alert("you cancel the delete");
+        }
+
+      }
+
+      async function likepost(id, like_flag) {
+        if (like_flag == 0) {
+          document.getElementById(`${id}`).style.color = "red"
+
+          const like_result = await fetch(`/likes/likes2?tweet_id=${id}&like_flag=1`);
+          const like_count = await like_result.json();
+          console.log(like_count);
+          document.getElementById(`likeCount${id}`).innerHTML = like_count.countLike;
+          document.getElementById(`${id}`).setAttribute("onclick", `likepost(${id}, 1)`);
+        }
+        else {
+          var like_btn = document.getElementById(`${id}`).style.color = "black"
+
+          const like_result = await fetch(`/likes/likes2?tweet_id=${id}&like_flag=0`);
+          const like_count = await like_result.json();
+          document.getElementById(`likeCount${id}`).innerHTML = like_count.countLike;
+          document.getElementById(`${id}`).setAttribute("onclick", `likepost(${id},0)`);
+        }
+
+      }
+
+    </script>
 </body>
 
 </html>
