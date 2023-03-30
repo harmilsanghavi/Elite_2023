@@ -54,8 +54,9 @@ const login = asyncHandler(async (req, res) => {
       if (followingid.length == 0) {
          if (sql) {
             tweetfollowing = ""
+            followinguser=""
             console.log("render2")
-            res.render('home.ejs', { data: sql,user:select_user, data2: token, tweetfollowing, tweetid: arr, likecount: arr2 });
+            res.render('home.ejs', { data: sql,user:select_user, data2: token, tweetfollowing, tweetid: arr, likecount: arr2 ,followinguser});
          } else {
             console.log("else")
             console.log("render3")
@@ -74,6 +75,7 @@ const login = asyncHandler(async (req, res) => {
             tweet = await query(`select * from user_tweets where u_id='${followingid[0].following_id}'`)
             tweetfollowing=tweetfollowing.concat(tweet)
             followinguser = await query(`select id,name,user_image from Elite_User where id='${followingid[0].following_id}' order by id desc`)
+            followingu=followingu.concat(followinguser)
          }
          console.log("name:::::::",tweetfollowing)
          console.log("following user ::::::::",followingu)
@@ -225,6 +227,7 @@ const login2 = asyncHandler(async (req, res) => {
                   tweet = await query(`select * from user_tweets where u_id='${followingid[0].following_id}' order by id desc`)
                   tweetfollowing=tweetfollowing.concat(tweet)
                   followinguser = await query(`select id,name,user_image from Elite_User where id='${followingid[0].following_id}'`)
+                  followingu=followingu.concat(followinguser)
                }
                console.log("tweet::::::::",tweetfollowing)
                console.log("name:::::::",followingu)
