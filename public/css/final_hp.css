@@ -760,6 +760,8 @@ color: black;
 .prachilikes{
   /* border: 1px solid; */
   margin-top: -5px;
+  text-decoration: none;
+  color: #000000;
 }
 
 .col_tweet {
