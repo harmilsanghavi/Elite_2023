@@ -16,7 +16,7 @@ const static1 = asyncHandler(async (req, res) => {
 })
 
 const static2 = asyncHandler(async (req, res) => {
-
+   
 
     res.render('staticpart2');
 })

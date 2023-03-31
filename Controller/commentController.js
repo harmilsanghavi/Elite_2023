@@ -41,7 +41,7 @@ const newc = asyncHandler(async (req, res) => {
       // console.log("comment data:::::::::::: ",commentData);
 
       //var nameImage=await query(`select name,user_image from Elite_User where id='${req.query.u_id}'`)
-      res.render('commentTweet', { data: tweetdata, c: comment, arr2,commentData })
+      res.render('commentTweet', { data: tweetdata, c: comment, arr2, commentData })
       //res.send({tweetdata})
    }
 })
@@ -50,12 +50,20 @@ const pComment = asyncHandler(async (req, res) => {
    // console.log(req.query.comment)
    var id = req.session.token_id;
    var token_id = req.session.token_id;
-   var sql = await query(`insert into tweet_comment(us_id,comment,twt_id) values('${token_id}','${req.query.comment}','${req.query.twid}')`)
-   var lastid = sql.insertId;
-   var all = await query(`select * from tweet_comment where id=${lastid}`)
-   var nameImage = await query(`select name,user_image from Elite_User where id='${all[0].us_id}'`)
-   // console.log(nameImage)
-   res.json({ all, nameImage });
+   if (req.query.comment.trim() == "") {
+      s = "enter text"
+      all=""
+      nameImage=""
+      res.json({ s,all,nameImage })
+   } else {
+      var sql = await query(`insert into tweet_comment(us_id,comment,twt_id) values('${token_id}','${req.query.comment}','${req.query.twid}')`)
+      var lastid = sql.insertId;
+      s=""
+      var all = await query(`select * from tweet_comment where id=${lastid}`)
+      var nameImage = await query(`select name,user_image from Elite_User where id='${all[0].us_id}'`)
+      // console.log(nameImage)
+      res.json({ s,all, nameImage });
+   }
 })
 
 module.exports = { newc, pComment }

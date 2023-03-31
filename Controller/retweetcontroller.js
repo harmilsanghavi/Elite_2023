@@ -43,13 +43,21 @@ const reC = asyncHandler(async (req, res) => {
    console.log(req.query.comment)
    var id = req.session.token_id;
    var token_id = req.session.token_id;
-   var result = await query(`insert into re_tweet(uid,tweet_id,retweet_data) values('${token_id}','${req.query.twid}','${req.query.comment}')`)
-   console.log(result)
-   var lastid = result.insertId;
-   var result2 = await query(`select * from re_tweet where id=${lastid}`)
-   var nameImage = await query(`select name,user_image from Elite_User where id='${result2[0].uid}'`)
-   res.json({ result2, nameImage })
-   //res.redirect('/login/login');
+   if (req.query.comment.trim() == "") {
+      s = "enter text"
+      result2 = ""
+      nameImage = ""
+      res.json({ s, result2, nameImage })
+   } else {
+      s = ""
+      var result = await query(`insert into re_tweet(uid,tweet_id,retweet_data) values('${token_id}','${req.query.twid}','${req.query.comment}')`)
+      console.log(result)
+      var lastid = result.insertId;
+      var result2 = await query(`select * from re_tweet where id=${lastid}`)
+      var nameImage = await query(`select name,user_image from Elite_User where id='${result2[0].uid}'`)
+      res.json({ s,result2, nameImage })
+      //res.redirect('/login/login');
+   }
 
 })
 const show = asyncHandler(async (req, res) => {
@@ -68,7 +76,7 @@ const show = asyncHandler(async (req, res) => {
 
       var retweetData = await query(`select name,user_image from Elite_User where id='${req.query.u_id}'`);
       // console.log(retweetData)
-      res.render("retweetShow", { tweetdata: tweet, retweet,retweetData })
+      res.render("retweetShow", { tweetdata: tweet, retweet, retweetData })
    }
 })
 
