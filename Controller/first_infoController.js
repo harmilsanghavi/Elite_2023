@@ -82,7 +82,8 @@ const user_info = asyncHandler(async (req, res) => {
                 // console.log("name image::::::::::welcome", select_user)
                 if (sql) {
                     tweetfollowing = ""
-                    res.render('home.ejs', { data: sql, data2: token, tweetfollowing, user: select_user });
+                    followinguser=""
+                    res.render('home.ejs', { data: sql, data2: token, tweetfollowing, user: select_user,followinguser });
                 } else {
                     console.log("else")
                     res.render('home.ejs', { data2: token });
@@ -97,7 +98,8 @@ const user_info = asyncHandler(async (req, res) => {
                 // console.log("name image::::::::::welcome", select_user)
                 if (sql) {
                     tweetfollowing = ""
-                    res.render('home.ejs', { data: sql, data2: token, tweetfollowing, user: select_user });
+                    followinguser=""
+                    res.render('home.ejs', { data: sql, data2: token, tweetfollowing, user: select_user ,followinguser});
                 } else {
                     console.log("else")
                     res.render('home.ejs', { data2: token });
