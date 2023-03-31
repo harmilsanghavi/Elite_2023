@@ -192,7 +192,7 @@
                           </p>
 
 
-                          <% if(data[i].media_url==null || data[i].media_url=="" ) { console.log("nothing") }else{ %>
+                          <% if(data[i].media_url==null || data[i].media_url=="" ) {  }else{ %>
                             <% const file_extension=data[i].media_url.slice(((data[i].media_url.lastIndexOf('.') - 1)>>>
                               0) + 2);
                               if (array_of_allowed_files.includes(file_extension)) { %>
@@ -229,7 +229,8 @@
                                                         <a id="likeCount<%=data[i].id%>" class="prachilikes"
                                                           href="/likes/likes2"></a>
                                                         <%}%>
-
+                                          </div>
+                                          </div>
                                                           <div class="icon_row">
                                                             <div class="icon_tab">
                                                               <a
@@ -239,7 +240,7 @@
                                                                 <%=arr3[i]%>
                                                               </p>
                                                             </div>
-
+                                                            </div>
                                                             <div class="icon_row">
                                                               <div class="icon_tab">
                                                                 <a
@@ -249,15 +250,17 @@
                                                               </div>
 
                                                             </div>
+                                                            <div class="icon_row">
+                                                              <div class="icon_tab">
+                                                                <a href="/retweet/show?tid=<%=data[i].id%>&u_id=<%=data[i].u_id%>"><i class="fa fa-solid fa-eye"></i></a>
+                                                              </div>
+    
+                                                            </div>
 
                                                           </div>
+
+                                                          
                                           </div>
-                                        </div>
-                                      </div>
-                                    </div>
-
-
-
                                   </div>
                         </div>
 
@@ -269,15 +272,17 @@
 
               </div>
                 <%}%>
-      </div>
 
-      <div class="widgets">
-        <%-include("staticpart2")-%>
-      </div>
-
-    </div>
-
-
+              </div>
+              
+              
+              
+              <div class="widgets">
+                <%-include("staticpart2")-%>
+              </div>
+            </div>
+            
+            </div>
 
 
 

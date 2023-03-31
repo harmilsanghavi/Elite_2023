@@ -12,7 +12,7 @@ const query = util.promisify(conn.query).bind(conn)
 
 const prof_new = asyncHandler(async (req, res) => {
     var cook = req.session.token;
-    console.log("cookie: ", cook);
+    // console.log("cookie: ", cook);
     if (!cook || (cook == '')) {
         res.redirect('/login/login')
     } else {
@@ -39,20 +39,20 @@ const prof_new = asyncHandler(async (req, res) => {
            arr2count.push(count2[0].count)
         }
 
-        console.log("::::::::::post ids::::::", arrid)
-        console.log(":::::::::number of like:::::::", arr2count)
+        // console.log("::::::::::post ids::::::", arrid)
+        // console.log(":::::::::number of like:::::::", arr2count)
 
 
 
 
-        console.log("sql:::  ", sql)
+        // console.log("sql:::  ", sql)
         const tweet = [];
         for (i = 0; i < sql.length; i++) {
             tweet.push(sql[i].id);
 
         }
 
-        console.log("arrr1:::::::: ", tweet);
+        // console.log("arrr1:::::::: ", tweet);
 
         const arr2 = [];
         for (i = 0; i < tweet.length; i++) {
@@ -61,9 +61,9 @@ const prof_new = asyncHandler(async (req, res) => {
         }
 
 
-        console.log("arrr2:::::::: ", arr2);
+        // console.log("arrr2:::::::: ", arr2);
         var length = arr2.length;
-        console.log("::::::", length);
+        // console.log("::::::", length);
 
         const arr3 = [];
         for (i = 0; i < tweet.length; i++) {
@@ -71,10 +71,10 @@ const prof_new = asyncHandler(async (req, res) => {
             arr3.push(profComment[0].x);
         }
         var token_id = req.session.token_id;
-        console.log("count:::::::::", token_id)
-        console.log("comment:::::: ", arr3)
+        // console.log("count:::::::::", token_id)
+        // console.log("comment:::::: ", arr3)
         var select_user = await query(`select name,user_image,user_name  from Elite_User where id='${token_id}'`)
-        console.log("name image:::::::welcome:::::::::", select_user)
+        // console.log("name image:::::::welcome:::::::::", select_user)
         res.render('prof', {
             data: sql, likeid: like, count: count[0].count, user: select_user, f: follower[0].c, profile_data: profdata[0], tweet_count: tweetcount[0].t, arr2, length, arr3,tweetid:arrid,likecount:arr2count
         });
@@ -82,7 +82,7 @@ const prof_new = asyncHandler(async (req, res) => {
 })
 const edit_prof = asyncHandler(async (req, res) => {
     var cook = req.session.token;
-    console.log("cookie: ", cook);
+    // console.log("cookie: ", cook);
     if (!cook || (cook == '')) {
         res.redirect('/login/login')
     } else {
@@ -92,14 +92,14 @@ const edit_prof = asyncHandler(async (req, res) => {
         var edit_query = await query(`select * from Elite_User where id='${token}'`);
         var sql = edit_query[0].date_of_birth;
 
-        console.log(":::::::", JSON.stringify(sql).slice(1, 5))
-        console.log(":::::::", JSON.stringify(sql).slice(6, 8))
+        // console.log(":::::::", JSON.stringify(sql).slice(1, 5))
+        // console.log(":::::::", JSON.stringify(sql).slice(6, 8))
 
-        console.log(":::::::", JSON.stringify(sql).slice(9, 11))
+        // console.log(":::::::", JSON.stringify(sql).slice(9, 11))
 
         var date = "";
         date += JSON.stringify(sql).slice(1, 5) + "-" + JSON.stringify(sql).slice(6, 8) + "-" + JSON.stringify(sql).slice(9, 11);
-        console.log(date)
+        // console.log(date)
 
         res.render('editprofile.ejs', { edit_query, date });
     }
@@ -118,7 +118,7 @@ var upload = multer({ storage: storage }).single('img');
 
 const update_prof = asyncHandler(async (req, res) => {
     var cook = req.session.token;
-    console.log("cookie: ", cook);
+    // console.log("cookie: ", cook);
     if (!cook || (cook == '')) {
         res.redirect('/login/login')
     } else {
@@ -128,10 +128,10 @@ const update_prof = asyncHandler(async (req, res) => {
             console.log("Token: ", req.body)
 
             if (req.file) {
-                console.log(":::::::::", req.file)
+                // console.log(":::::::::", req.file)
                 var FileName = req.file.filename;
                 var imgsrc = '/files/' + req.file.filename;
-                console.log(imgsrc)
+                // console.log(imgsrc)
                 var update_prof = `update Elite_User set name='${req.body.user_name}',bio='${req.body.user_bio}',user_image='${imgsrc}',date_of_birth='${req.body.dob}' where id='${token}'`;
                 conn.query(update_prof, (err, result) => {
                     if (err) throw err

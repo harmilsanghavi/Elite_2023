@@ -8,7 +8,7 @@ var c;
 const query = util.promisify(conn.query).bind(conn)
 const login = asyncHandler(async (req, res) => {
    var cook = req.session.token;
-   console.log("cookie: ", cook);
+   // console.log("cookie: ", cook);
    if ((!cook) || cook == '') {
       var str = "";
       c = 0;
@@ -58,7 +58,7 @@ const login = asyncHandler(async (req, res) => {
             console.log("render2")
             res.render('home.ejs', { data: sql,user:select_user, data2: token, tweetfollowing, tweetid: arr, likecount: arr2 ,followinguser});
          } else {
-            console.log("else")
+            // console.log("else")
             console.log("render3")
             res.render('home.ejs', { data2: token });
          }
@@ -77,8 +77,8 @@ const login = asyncHandler(async (req, res) => {
             followinguser = await query(`select id,name,user_image from Elite_User where id='${followingid[0].following_id}' order by id desc`)
             followingu=followingu.concat(followinguser)
          }
-         console.log("name:::::::",tweetfollowing)
-         console.log("following user ::::::::",followingu)
+         // console.log("name:::::::",tweetfollowing)
+         // console.log("following user ::::::::",followingu)
          //console.log(tweet)
          if (sql) {
             console.log("render4")
@@ -157,7 +157,7 @@ const kakaLogin = asyncHandler(async (req, res) => {
 const login2 = asyncHandler(async (req, res) => {
    var tweetfollowing=[],followingu=[]
    var cook = req.session.token;
-   console.log("cookie: ", cook);
+   // console.log("cookie: ", cook);
    if (!cook) {
       var str = "";
       c = 0;
@@ -167,7 +167,7 @@ const login2 = asyncHandler(async (req, res) => {
    else {
 
       var token = req.session.token;
-      console.log("token verify", token);
+      // console.log("token verify", token);
       //res.render('home.ejs', { data: token });
       var id = req.session.token_id;
       var token_id = req.session.token_id;
@@ -229,8 +229,8 @@ const login2 = asyncHandler(async (req, res) => {
                   followinguser = await query(`select id,name,user_image from Elite_User where id='${followingid[0].following_id}'`)
                   followingu=followingu.concat(followinguser)
                }
-               console.log("tweet::::::::",tweetfollowing)
-               console.log("name:::::::",followingu)
+               // console.log("tweet::::::::",tweetfollowing)
+               // console.log("name:::::::",followingu)
                if (sql) {
                   console.log("render12")
                   res.render('home.ejs', { data: sql, data2: token, user:select_user,tweetfollowing, tweetid: arr, likecount: arr2 ,followinguser:followingu});

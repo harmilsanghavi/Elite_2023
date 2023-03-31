@@ -16,13 +16,13 @@
         <div class="retweetContainer">
             <% const array_of_allowed_files=['png', 'jpeg' , 'jpg' ]; const array_of_allowed_videos=['mp4','gif']; %>
                 <% for(var i=0;i<tweetdata.length;i++) { %>
-       
-                   
+
+
 
                     <div class="tweet">
-                        <div onclick="history.back()"  class="top1">
+                        <div onclick="history.back()" class="top1">
                             <i class="fa fa-close" style="font-size:24px"></i>
-                    
+
                         </div>
                         <div class="test_col_row">
                             <div class="text_col1">
@@ -32,19 +32,20 @@
                                 <p id="tweetid" hidden>
                                     <%=tweetdata[i].id%>
                                 </p>
-                                <a href=""><%=retweetData[0].name%></a>
+                                <a href="">
+                                    <%=retweetData[0].name%>
+                                </a>
 
                                 <div class="icon">
                                     <!-- <div class="insta" id="append"> -->
-                                        <div class="retweetCard1">
-                                            <textarea name="comment" id="emoji123"
-                                                placeholder="Add a comment"></textarea>
-                                        </div>
-                                        <div class="retweetCard2">
-                                            <i class="fa-regular fa-face-smile "  onclick="abc()"></i>
-                                            <emoji-picker></emoji-picker>
-                                        </div>
-                                        <!-- removed from here{show retweet} -->
+                                    <div class="retweetCard1">
+                                        <textarea name="comment" id="emoji123" placeholder="Add a comment"></textarea>
+                                    </div>
+                                    <div class="retweetCard2">
+                                        <i class="fa-regular fa-face-smile " onclick="abc()"></i>
+                                        <emoji-picker></emoji-picker>
+                                    </div>
+                                    <!-- removed from here{show retweet} -->
                                     <!-- </div> -->
                                 </div>
 
@@ -65,7 +66,7 @@
                                             </video>
                                             <% }}%>
                                 </div>
-
+                                <p id="all"></p>
                                 <div class="retweetPost">
                                     <span id="<%=tweetdata[i].id%>" onclick="postComment(this)">
                                         Post</span>
@@ -85,21 +86,30 @@
             console.log(id.id)
             var c = document.getElementById("emoji123").value
             var data = await fetch(`/retweet/reC?twid=${id.id}&comment=${c}`)
-            location.assign('/login/login')
             var retweet = await data.json()
-            console.log(retweet)
-            console.log(retweet.nameImage[0].name)
-            console.log(retweet.nameImage[0].user_image)
-            console.log(retweet.result2[0].retweet_data)
-            document.getElementById("all").innerHTML = retweet.result2[0].retweet_data
-            document.getElementById("name").innerHTML = retweet.nameImage[0].name
-            if (comment.nameImage[0].user_image == null) {
-                const img = document.createElement("img");
-                img.src = "/files/profile-img.png";
-                document.getElementById("name").appendChild(img);
-                //document.getElementById("image").src = "/files/profile-img.png"
+            if (retweet.s.length > 1) {
+                document.getElementById("all").innerHTML = retweet.s
             } else {
-                document.getElementById("image").src = retweet.nameImage[0].user_image
+                location.assign('/login/login')
+            }
+            console.log(retweet)
+            if (retweet.s.length > 1) {
+                document.getElementById("all").innerHTML = retweet.s
+            } else {
+                document.getElementById("all").innerHTML = ""
+                console.log(retweet.nameImage[0].name)
+                console.log(retweet.nameImage[0].user_image)
+                console.log(retweet.result2[0].retweet_data)
+                document.getElementById("all").innerHTML = retweet.result2[0].retweet_data
+                document.getElementById("name").innerHTML = retweet.nameImage[0].name
+                if (comment.nameImage[0].user_image == null) {
+                    const img = document.createElement("img");
+                    img.src = "/files/profile-img.png";
+                    document.getElementById("name").appendChild(img);
+                    //document.getElementById("image").src = "/files/profile-img.png"
+                } else {
+                    document.getElementById("image").src = retweet.nameImage[0].user_image
+                }
             }
         }
 

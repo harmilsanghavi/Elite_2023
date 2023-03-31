@@ -96,6 +96,11 @@
                         var data = await fetch(`/comment/postComment?twid=${id.id}&comment=${c}`)
                         var comment = await data.json()
                         console.log(comment)
+                        console.log(comment.s.length)
+                        if(comment.s.length>1){
+                            document.getElementById("all").innerHTML =comment.s 
+                        }else{
+                            document.getElementById("all").innerHTML =""
                         console.log(comment.nameImage[0].name)
                         console.log(comment.nameImage[0].user_image)
                         console.log(comment.all[0].comment)
@@ -108,6 +113,7 @@
                             //document.getElementById("image").src = "/files/profile-img.png"
                         } else {
                             document.getElementById("image").src = comment.nameImage[0].user_image
+                        }
                         }
                     }
 
