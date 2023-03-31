@@ -55,7 +55,7 @@ const upload2 = asyncHandler(async (req, res) => {
                     res.redirect("/login/login")
                 });
             } else {
-                if (req.body.desc == "") {
+                if (req.body.desc.trim() == "") {
                     s="you have enter at least one value"
                     res.render("tweet_add",{s})
                 } else {
