@@ -85,6 +85,7 @@
         async function postComment(id) {
             console.log(id.id)
             var c = document.getElementById("emoji123").value
+            
             var data = await fetch(`/retweet/reC?twid=${id.id}&comment=${c}`)
             var retweet = await data.json()
             if (retweet.s.length > 1) {

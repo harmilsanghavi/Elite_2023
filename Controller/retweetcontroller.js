@@ -49,7 +49,7 @@ const reC = asyncHandler(async (req, res) => {
       nameImage = ""
       res.json({ s, result2, nameImage })
    } else {
-      s = "enter text"
+      s = ""
       var result = await query(`insert into re_tweet(uid,tweet_id,retweet_data) values('${token_id}','${req.query.twid}','${req.query.comment}')`)
       console.log(result)
       var lastid = result.insertId;
