@@ -230,7 +230,7 @@ const login2 = asyncHandler(async (req, res) => {
                   followingu=followingu.concat(followinguser)
                }
                // console.log("tweet::::::::",tweetfollowing)
-               console.log("name:::::::",followingu)
+               // console.log("name:::::::",followingu)
                if (sql) {
                   console.log("render12")
                   res.render('home.ejs', { data: sql, data2: token, user:select_user,tweetfollowing, tweetid: arr, likecount: arr2 ,followinguser:followingu});
