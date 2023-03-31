@@ -141,7 +141,7 @@
                                          
                                 <%if(followinguser[j].user_image== "" || followinguser[j].user_image== null){%>
                                   <div class="img1"><img src="/files/profile-img.png"></div>
-                                  <%}else{ console.log("welcome",followinguser[j].user_image)%>
+                                  <%}else{ %>
                                     <div class="img1"><img src="<%=followinguser[j].user_image%>"></div>
                                   <% } %>
                                
@@ -157,7 +157,7 @@
                                 <p class="skill">
                                   <%=tweetfollowing[i].description%>
                                 </p>
-                                <% if(tweetfollowing[i].media_url==null) { console.log("nothing") }else{ const
+                                <% if(tweetfollowing[i].media_url==null) { }else{ const
                                   file_extension=tweetfollowing[i].media_url.slice(((tweetfollowing[i].media_url.lastIndexOf('.')
                                   - 1)>>> 0) + 2);
                                   if (array_of_allowed_files.includes(file_extension)) {

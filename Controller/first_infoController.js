@@ -31,10 +31,10 @@ var upload = multer({ storage: storageEngine }).single('img');
 const user_info = asyncHandler(async (req, res) => {
 
     var token_id = req.session.token_id;
-    console.log("main:::::::::::", token_id)
-    console.log('Bharti')
+    // console.log("main:::::::::::", token_id)
+    // console.log('Bharti')
 
-    console.log("demo:::::::", req.session)
+    // console.log("demo:::::::", req.session)
 
     upload(req, res, async function (err) {
         //     index1
@@ -47,7 +47,7 @@ const user_info = asyncHandler(async (req, res) => {
 
 
                 var FileName = req.file.filename;
-                console.log(FileName);
+                // console.log(FileName);
 
                 var imgsrc = '/files/' + req.file.originalname;
                 var INPUT_path_to_your_images, OUTPUT_path;
@@ -72,14 +72,14 @@ const user_info = asyncHandler(async (req, res) => {
                 var compree_image = "/compress/" + req.file.originalname;
 
                 var token = req.session.token;
-                console.log("token verify", token);
+                // console.log("token verify", token);
                 var token_id = req.session.token_id;
                 //var token_id = req.session.token_id;
-                console.log("count:::::::::welcome", token_id)
+                // console.log("count:::::::::welcome", token_id)
                 var set = query(`update Elite_User set number='${req.body.contact}', date_of_birth='${req.body.dob}', bio='${req.body.bio}', user_image = '${compree_image}' where id='${token_id}'`)
                 var sql = query(`select heading,description,media_url from user_tweets where u_id='${token_id}'`)
                 var select_user = await query(`select name,user_image,user_name from Elite_User where id='${token_id}'`)
-                console.log("name image::::::::::welcome", select_user)
+                // console.log("name image::::::::::welcome", select_user)
                 if (sql) {
                     tweetfollowing = ""
                     res.render('home.ejs', { data: sql, data2: token, tweetfollowing, user: select_user });
@@ -94,7 +94,7 @@ const user_info = asyncHandler(async (req, res) => {
                 var set = query(`update Elite_User set number='${req.body.contact}', date_of_birth='${req.body.dob}', bio='${req.body.bio}' where id='${token_id}'`)
                 var sql = query(`select heading,description,media_url from user_tweets where u_id='${token_id}'`)
                 var select_user = await query(`select name,user_image,user_name from Elite_User where id='${token_id}'`)
-                console.log("name image::::::::::welcome", select_user)
+                // console.log("name image::::::::::welcome", select_user)
                 if (sql) {
                     tweetfollowing = ""
                     res.render('home.ejs', { data: sql, data2: token, tweetfollowing, user: select_user });

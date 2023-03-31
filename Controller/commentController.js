@@ -8,21 +8,21 @@ const asyncHandler = require("express-async-handler");
 const query = util.promisify(conn.query).bind(conn)
 const newc = asyncHandler(async (req, res) => {
    var cook = req.session.token;
-   console.log("cookie: ", cook);
+   //console.log("cookie: ", cook);
    if (!cook || (cook == '')) {
       res.redirect('/login/login')
    } else {
-      console.log(req.query.tid)
-      console.log(":::::::::::::::::::::::::::", req.query.u_id)
+      //console.log(req.query.tid)
+      //console.log(":::::::::::::::::::::::::::", req.query.u_id)
       var tweetdata = await query(`select * from user_tweets where id='${req.query.tid}'`)
       var comment = await query(`select * from tweet_comment where twt_id='${req.query.tid}' and us_id=${req.query.u_id}`)
-      console.log(tweetdata)
-      console.log(comment)
+      // console.log(tweetdata)
+      // console.log(comment)
       var arr = []
       for (var j = 0; j < comment.length; j++) {
          arr.push(comment[j].us_id)
       }
-      console.log(arr)
+      // console.log(arr)
       var nameImage;
       var arr2 = [];
       if (Array.isArray(arr)) {
@@ -31,14 +31,14 @@ const newc = asyncHandler(async (req, res) => {
             arr2.push(nameImage[0])
          }
       }
-      console.log(arr2)
-      console.log("::::::::::::::::::::::::", arr2.length)
+      // console.log(arr2)
+      // console.log("::::::::::::::::::::::::", arr2.length)
 
       var id = req.session.token_id;
       var token_id = req.session.token_id;
-      console.log("token::::::  ",token_id)
+      // console.log("token::::::  ",token_id)
       var commentData = await query(`select name,user_image from Elite_User where id='${token_id}'`);
-      console.log("comment data:::::::::::: ",commentData);
+      // console.log("comment data:::::::::::: ",commentData);
 
       //var nameImage=await query(`select name,user_image from Elite_User where id='${req.query.u_id}'`)
       res.render('commentTweet', { data: tweetdata, c: comment, arr2,commentData })
@@ -54,7 +54,7 @@ const pComment = asyncHandler(async (req, res) => {
    var lastid = sql.insertId;
    var all = await query(`select * from tweet_comment where id=${lastid}`)
    var nameImage = await query(`select name,user_image from Elite_User where id='${all[0].us_id}'`)
-   console.log(nameImage)
+   // console.log(nameImage)
    res.json({ all, nameImage });
 })
 

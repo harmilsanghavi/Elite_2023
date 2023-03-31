@@ -9,7 +9,7 @@ const asyncHandler = require("express-async-handler");
 const query = util.promisify(conn.query).bind(conn)
 const tweet = asyncHandler(async (req, res) => {
     var cook = req.session.token;
-    console.log("cookie: ", cook);
+    // console.log("cookie: ", cook);
     if (!cook) {
         var str = "";
         c = 0;
@@ -36,7 +36,7 @@ var upload = multer({ storage: storage }).single('img');
 const upload2 = asyncHandler(async (req, res) => {
     var id = req.session.token_id;
     var token = req.session.token_id;
-    console.log(token)
+    // console.log(token)
     upload(req, res, function (err) {
 
         if (err) {
@@ -46,7 +46,7 @@ const upload2 = asyncHandler(async (req, res) => {
             if (req.file) {
 
                 var FileName = req.file.filename;
-                console.log(FileName);
+                // console.log(FileName);
 
                 var imgsrc = '/files/' + req.file.filename;
                 var insertData = `INSERT INTO user_tweets(u_id,description,media_url)VALUES('${token}','${req.body.desc}','${imgsrc}')`

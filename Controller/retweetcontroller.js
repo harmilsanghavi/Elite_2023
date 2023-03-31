@@ -53,21 +53,21 @@ const reC = asyncHandler(async (req, res) => {
 
 })
 const show = asyncHandler(async (req, res) => {
-   console.log(req.query.tid)
-   console.log(req.query.u_id)
+   // console.log(req.query.tid)
+   // console.log(req.query.u_id)
    var tweet;
    var retweet = await query(`select * from re_tweet where tweet_id='${req.query.tid}'`)
-   console.log(retweet)
+   // console.log(retweet)
    if (retweet == "") {
       res.send(`nothing retweet<a href="/login/login">Click Here</a>`)
    } else {
       tweet = await query(`select * from user_tweets where id='${req.query.tid}'`)
       var token_id = req.session.token_id;
-      console.log("token::::::  ", token_id)
+      // console.log("token::::::  ", token_id)
 
 
       var retweetData = await query(`select name,user_image from Elite_User where id='${req.query.u_id}'`);
-      console.log(retweetData)
+      // console.log(retweetData)
       res.render("retweetShow", { tweetdata: tweet, retweet,retweetData })
    }
 })
