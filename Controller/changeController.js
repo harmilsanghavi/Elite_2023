@@ -6,7 +6,7 @@ const conn = require('../connection/connection')
 const asyncHandler = require("express-async-handler");
 
 const query = util.promisify(conn.query).bind(conn)
-const change = asyncHandler(async (req, res) => {
+const change = (async (req, res) => {
     var cook = req.session.token;
     //console.log("cookie: ", cook);
     if (!cook ||(cook == '') ){

@@ -34,7 +34,7 @@ const kaka = asyncHandler(async (req, res) => {
 })
 
 const email = asyncHandler(async (req, res) => {
-    var sql = `select * from Elite_User where email='${req.query.email}'`;
+    var sql = `select * from Elite_User where email='${req.query.email}' and is_delete=0`;
     conn.query(sql, (err, data) => {
         if (err) throw err;
         // console.log(data);
@@ -45,7 +45,7 @@ const email = asyncHandler(async (req, res) => {
 })
 
 const username = asyncHandler(async (req, res) => {
-    var sql = `select * from Elite_User where user_name='${req.query.userName}'`;
+    var sql = `select * from Elite_User where user_name='${req.query.userName}' and is_delete=0`;
     conn.query(sql, (err, data) => {
         if (err) throw err;
         // console.log(data);
