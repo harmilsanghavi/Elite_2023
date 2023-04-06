@@ -105,3 +105,9 @@ background: radial-gradient(circle, rgba(133,125,249,1) 16%, rgba(203,221,224,1)
     padding: 10px;
 }
 /* comment changes end */
+.setemoj {
+    margin-left: 67%;
+    width: 16rem;
+    margin-top: 240px;
+    --emoji-size: 1rem;
+    height: 17rem;}
