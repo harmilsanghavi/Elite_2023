@@ -47,7 +47,7 @@
   
           </div>
           <div class="happen">
-            <textarea name="desc"  maxlength="200" class="textarea1"  placeholder="What's happening?"
+            <textarea name="desc" onkeyup="check(this)"  maxlength="200" class="textarea1"  placeholder="What's happening?"
               id="emoji123"></textarea>
               <img id="preview"  style="width:300px; height: 300px; display: none;">
             <p id="err1"></p>
@@ -76,7 +76,7 @@
         </div>
           <div class="uploadpic">
   
-            <input type="submit" value="Tweet" class="tweetbtn" />
+            <input type="submit" id="demo" value="Tweet" class="tweetbtn" />
           </div>
         </div>
         </div>
@@ -86,6 +86,18 @@
   </form>
 
   <script>
+
+    function check(x){
+      console.log(x.value.length)
+      if(x.value.length>100){
+        document.getElementById("err1").innerHTML = "enter valid text";
+        document.getElementById("demo").disabled = true;
+      }else{
+        document.getElementById("demo").disabled = false;
+        document.getElementById("err1").innerHTML = "";
+      }
+    }
+
     document.querySelector('emoji-picker')
       .addEventListener('emoji-click', event => console.log(event.detail));
 
@@ -128,7 +140,6 @@
       else {
         document.getElementById("err1").innerHTML = "";
       }
-
     }
 
     const previewImage = (event) => {

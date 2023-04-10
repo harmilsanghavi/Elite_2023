@@ -81,7 +81,7 @@
                                           <% if(data[i].id==tweetid[j]){%>
                                             <i id="<%=data[i].id%>" class="like_d fa fa-thumbs-up"
                                               onclick="likepost(this.id,1)"></i>
-                                            <a id="likeCount<%=data[i].id%>" class="prachilikes" href="/likes/likes2">
+                                            <a id="likeCount<%=data[i].id%>" class="prachilikes" href="">
                                               <%=likecount[j]%>
                                             </a>
                                             <%flag=1%>
@@ -91,7 +91,7 @@
                                                   
                                                     <i id="<%=data[i].id%>" class="like_c fa fa-thumbs-up" 
                                                       onclick="likepost(this.id,0)"></i>
-                                                      <a id="likeCount<%=data[i].id%>" class="prachilikes" href="/likes/likes2"></a>
+                                                      <a id="likeCount<%=data[i].id%>" class="prachilikes" href=""></a>
                                                     <%}%>
                                                       <div class="icon_row">
                                                         <div class="icon_col">

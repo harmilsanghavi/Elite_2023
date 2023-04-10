@@ -18,6 +18,7 @@ const deleteA = asyncHandler(async (req, res) => {
         var sql = await query(`update Elite_User set is_delete=1 where id='${token_id}'`);
         res.clearCookie("authcookie");
         res.clearCookie("home");
+        req.session.destroy();
         res.send({ data: "hello" });
     }
 })

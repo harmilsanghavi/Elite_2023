@@ -1,5 +1,4 @@
 var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
 const date = require('date-and-time')
 var util = require('util')
 const conn = require('../connection/connection')
@@ -7,10 +6,6 @@ const asyncHandler = require("express-async-handler");
 var c;
 const query = util.promisify(conn.query).bind(conn)
 const login = async (req, res) => {
-   try {
-   } catch (error) {
-      return res.send("")
-   }
    var cook = req.session.token;
    // console.log("cookie: ", cook) 
    if ((!cook) || cook == '') {
