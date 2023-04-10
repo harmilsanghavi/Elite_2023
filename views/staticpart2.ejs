@@ -16,14 +16,26 @@
 
     <div class="input1  header1" id="myHeader1">
         <span class="material-icons widgets__searchIcon"> search </span>
-        <input type="text" class="searchtext" placeholder="Search Twitter" onkeyup="search(this.value)" />
+        <input type="text" class="searchtext" id="search" placeholder="Search Twitter" />
     </div>
     <p id="searchresult"></p>
   
 
     <script>
-        var followinguser = [];
-        async function search(search_value) {
+        var timer=0
+        var search=document.getElementById("search")
+        var result=document.getElementById('searchresult')
+        search.addEventListener("keyup",async(e)=>{
+            result.innerHTML="Loading...."
+            if(e.target.value==""){
+                result.innerHTML=""
+                return
+            }
+            clearTimeout(timer)
+            timer=setTimeout(() => debounceFirst(e.target.value.trim()),1000);
+        })
+        async function debounceFirst(search_value) {
+            console.log("value:::::::::::",search_value)
             var s = "";
             if (search_value == "") {
                 document.getElementById('searchresult').innerHTML = s;
@@ -79,6 +91,7 @@
             }
             // console.log(search_value);
         }
+        var followinguser = [];
         async function follow(id, follow_flag) {
             if (follow_flag == 0) {
                 var following_btn = document.getElementById(`followbutton${id}`).innerHTML = "Unfollow";
