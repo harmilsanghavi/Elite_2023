@@ -144,6 +144,16 @@
     }
 
     const previewImage = (event) => {
+      var tweet_image = document.getElementById("image");
+      var imgsize = Math.round(tweet_image.files[0].size / 1048576);
+      if (imgsize > 2) {
+        document.getElementById("err2").innerHTML = "upload image whose size is less than 2mb";
+        document.getElementById("demo").disabled = true;
+      }
+      else {
+        document.getElementById("err2").innerHTML = "";
+        document.getElementById("demo").disabled = false;
+      }
       /**
       * Get the selected files.
       */
