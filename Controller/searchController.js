@@ -23,6 +23,14 @@ const home = asyncHandler(async (req, res) => {
   
 
 })
+const allData = asyncHandler(async (req, res) => {
+  var id=req.session.token_id
+  var data=await query(`select id,name,email,user_image from Elite_User where id <> ${id} limit 5`)
+  var search_following = await query(`SELECT following_id from user_following where user_i = ${id}`)
+
+  res.send({data,following:search_following})
+
+})
 
 const follower = asyncHandler(async (req, res) => {
   var cook_id = req.session.token_id;
@@ -78,4 +86,4 @@ const follower = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { home, follower }
+module.exports = { home, follower,allData }
