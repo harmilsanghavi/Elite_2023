@@ -25,7 +25,8 @@ const comment = require('./Routes/comment')
 const likes=require('./Routes/likes')
 const retweet=require('./Routes/retweet')
 
-const chnagepassword = require('./Routes/changepassword')
+const chnagepassword = require('./Routes/changepassword');
+const { readdir } = require('fs');
 
 var c;
 app.use(express.static('public'));
@@ -66,6 +67,9 @@ app.use('/changepassword',chnagepassword)
 app.use('/likes',likes)
 app.use('/retweet',retweet)
 
+app.get("/",(req,res)=>{
+   res.redirect(`/login/login`)
+})
 
 
 app.listen(process.env.PORT,(req,res)=>{

@@ -16,17 +16,79 @@
 
     <div class="input1  header1" id="myHeader1">
         <span class="material-icons widgets__searchIcon"> search </span>
-        <input type="text" class="searchtext" placeholder="Search Twitter" onkeyup="search(this.value)" />
+        <input type="text" class="searchtext" id="search" placeholder="Search Twitter" />
     </div>
     <p id="searchresult"></p>
   
 
     <script>
-        var followinguser = [];
-        async function search(search_value) {
+        allSuggest()
+        async function allSuggest(){
+            var result=await fetch(`/search/allData`)
+            .then(res => res.json())
+            .then((arr) => {
+                        var s=""
+                        var result=document.getElementById('searchresult')
+                        console.log(result)
+                        for (i = 0; i < arr.data.length; i++) {
+                            s += `
+                       
+ 
+                        <div class="searchprofile">
+                            <div class="profileinfo1">
+                                <img  class="imgSearch" src="/files/profile-img.png" alt="">
+                            </div>
+                            <div class="profileinfo2">
+                                   <div class="name">
+                                    <span onclick=clickuser(`+arr.data[i].id+`)>`+ arr.data[i].name + `</span>
+                                    </div>
+                                    <div class="email">
+                                    <span>`+ arr.data[i].email + `</span>
+                                     </div>
+                            </div>
+                            <div class="profileinfo3">
+                                <div class="followbtn">`;
+                            for (let i = 0; i < arr.following.length; i++) {
+                                followinguser.push(arr.following[i].following_id);
+                            }
+                            console.log("followinguser", followinguser);
+                            console.log("followinguser.includes(arr.listUser[0].id)", arr.data[i].id)
+                            if (followinguser.includes(arr.data[i].id)) {
+                                s += ` <span  class="testbtn" onclick="follow(${arr.data[i].id},${1})" id="followbutton${arr.data[i].id}">UnFollow</span>`;
+
+                            } else {
+                                s += ` <span class="testbtn" onclick="follow(${arr.data[i].id},${0})"  id="followbutton${arr.data[i].id}">Follow</span>`;
+                            }
+
+                            s += `
+                               
+                                </div>
+                            </div>    
+                            </div>
+                       `;
+                    }
+                    result.innerHTML=s
+                    })
+        }
+
+        var timer=0
+        var search=document.getElementById("search")
+        var result=document.getElementById('searchresult')
+        search.addEventListener("keyup",async(e)=>{
+            result.innerHTML="Loading...."
+            if(e.target.value==""){
+                allSuggest()
+
+                return
+            }
+            clearTimeout(timer)
+            timer=setTimeout(() => debounceFirst(e.target.value.trim()),1000);
+        })
+        async function debounceFirst(search_value) {
+            console.log("value:::::::::::",search_value)
             var s = "";
             if (search_value == "") {
-                document.getElementById('searchresult').innerHTML = s;
+                
             }
             else {
                 var search_result = await fetch(`/search/home?var=${search_value}`)
@@ -79,6 +141,7 @@
             }
             // console.log(search_value);
         }
+        var followinguser = [];
         async function follow(id, follow_flag) {
             if (follow_flag == 0) {
                 var following_btn = document.getElementById(`followbutton${id}`).innerHTML = "Unfollow";

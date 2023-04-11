@@ -146,7 +146,7 @@
         <% const array_of_allowed_files=['png', 'jpeg' , 'jpg' ]; const array_of_allowed_videos=['mp4','gif']; %>
           <% for(var i=0;i<data.length;i++) { %>
             <%var flag=0 %>
-              <div class="profPost">
+              <div id="demo<%=i%>" class="profPost">
 
 
                 <div class="post-child">
@@ -176,6 +176,7 @@
                           <p class="tweetnamed">
                             <%=profile_data.user_name%>
                           </p>
+                          
 
                         </div>
 
@@ -257,6 +258,14 @@
     
                                                             </div>
 
+                                                            <div class="icon_row">
+                                                              <div class="icon_tab">
+                                                                <p id="<%=data[i].id%>" onclick="deleteOne(i,id)"><i class="fa fa-trash"></i></p>
+                                                                <p id="i" hidden><%=i%></p>
+                                                              </div>
+    
+                                                            </div>
+
                                                           </div>
 
                                                           
@@ -321,7 +330,17 @@
 
 
 
-
+      async function deleteOne(i2,id){
+        console.log(id)
+        var i=document.getElementById("i").innerHTML
+        console.log("i",i)
+        // var i=document.getElementById(`demo${i2}`)
+        console.log(i)
+        var result=await fetch(`/retweet/delete?i=${i}&twid=${id}`)
+        var data= await result.json()
+        console.log("deleted",data.data)
+        document.getElementById(`demo${data.data}`).style.display = "none"
+      }
 
 
 

@@ -80,4 +80,14 @@ const show = asyncHandler(async (req, res) => {
    }
 })
 
-module.exports = { re, reC, show }
+
+const delete1 = asyncHandler(async (req, res) => {
+   console.log("tokenId:::::", req.query.twid)
+   var i= req.query.i
+   var likeDelete=await query(`delete from tweet_like where twet_id=${req.query.twid}`)
+   var likeDelete=await query(`delete from tweet_comment where twt_id=${req.query.twid}`)
+   var retweetDelete=await query(`delete from re_tweet where tweet_id=${req.query.twid}`)
+   var delete1=await query(`delete from user_tweets where id=${req.query.twid}`)
+   res.send({data:i})
+})
+module.exports = { re, reC, show,delete1 }

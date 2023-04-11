@@ -79,6 +79,7 @@
     let name = document.getElementById("namee").value;
     let email = document.getElementById("emaill").value;
     let password = document.getElementById("pass").value;
+    let userName = document.getElementById("username").value;
     let con_password = document.getElementById("con_pass").value;
 
     if (name == "") {
@@ -96,8 +97,15 @@
       return false;
     }
     else {
-      document.getElementById("error1").innerHTML = "";
+      document.getElementById("error2").innerHTML = "";
 
+    }
+
+    if(userName==""){
+      document.getElementById("error5").innerHTML = "Please enter valid email";
+      return false;
+    }else{
+      document.getElementById("error5").innerHTML = "";
     }
 
     var regex1 = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{6,20})/;
@@ -107,7 +115,7 @@
       return false;
     }
     else {
-      document.getElementById("error1").innerHTML = "";
+      document.getElementById("error3").innerHTML = "";
 
     }
     if (con_password != password) {
@@ -115,7 +123,7 @@
       return false;
     }
     else {
-      document.getElementById("error1").innerHTML = "";
+      document.getElementById("error4").innerHTML = "";
 
     }
   }

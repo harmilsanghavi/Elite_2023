@@ -1,14 +1,13 @@
 var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
 const date = require('date-and-time')
 var util = require('util')
 const conn = require('../connection/connection')
 const asyncHandler = require("express-async-handler");
 var c;
 const query = util.promisify(conn.query).bind(conn)
-const login = asyncHandler(async (req, res) => {
+const login = async (req, res) => {
    var cook = req.session.token;
-   // console.log("cookie: ", cook);
+   // console.log("cookie: ", cook) 
    if ((!cook) || cook == '') {
       var str = "";
       c = 0;
@@ -92,7 +91,7 @@ const login = asyncHandler(async (req, res) => {
 
    }
 
-})
+}
 
 
 const kakaLogin = asyncHandler(async (req, res) => {

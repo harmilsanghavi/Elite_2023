@@ -15,12 +15,20 @@ const home = asyncHandler(async (req, res) => {
 
 
   var fname = req.query.var;
-  var search_query = await query(`select * from Elite_User where name like '${fname}%' and id <> ${token}`)
+  var search_query = await query(`select * from Elite_User where name like '${fname}%' and id <> ${token} and is_delete=0`)
   var search_following = await query(`SELECT following_id from user_following where user_i = ${token};`)
 
   // console.log(":::::::",search_query);
   res.send({listUser:search_query,following:search_following})
   
+
+})
+const allData = asyncHandler(async (req, res) => {
+  var id=req.session.token_id
+  var data=await query(`select id,name,email,user_image from Elite_User where id <> ${id} and is_delete=0 limit 5`)
+  var search_following = await query(`SELECT following_id from user_following where user_i = ${id}`)
+
+  res.send({data,following:search_following})
 
 })
 
@@ -78,4 +86,4 @@ const follower = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { home, follower }
+module.exports = { home, follower,allData }

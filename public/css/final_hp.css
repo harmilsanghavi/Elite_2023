@@ -820,6 +820,7 @@ max-width:450px;
   font-weight:400;
   margin-top:-10px;
   margin-bottom:0px;
+  word-wrap: break-word;
   
 }
 .icon
